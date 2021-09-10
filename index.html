@@ -1,0 +1,57 @@
+<html>
+<head>
+<title>Numbers API</title>	
+</head>
+
+<body>
+
+<label>Select Data to Fetch</label><br/>
+
+<select id="api" name="api" onclick="fetchData(this)">
+	<option value="">Select</option>
+	<option value="math">MATH</option>
+	<option value="trivia">TRIVIA</option>
+	<option value="date">DATE</option>
+</select>
+
+<input type="text" id="text" placeholder="Enter Term here" />
+
+<h2>API Response will be displayed below:</h2>
+
+<div id="results"></div>
+
+<script>
+
+	function showData(data){
+		document.getElementById('results').innerHTML = data;
+	}
+
+	function fetchData(e){
+
+		var api_url = "http://numbersapi.com/";
+		var term = document.getElementById("text").value;
+
+		if(e.value=='math'){
+			if(term===''){ alert("Enter term"); term.focus(); }
+			api_url += term + "/math";
+		}else if(e.value=='trivia'){
+			if(term===''){ alert("Enter term"); term.focus(); }
+			api_url += term;
+
+		}else if(e.value=='date'){
+			if(term===''){ alert("Enter term"); term.focus(); }
+			api_url += term + "/date";
+		}
+
+		fetch(api_url)
+		.then(response => response.text())
+		.then(data=>showData(data));
+	}
+
+</script>
+
+
+
+
+</body>
+</html>
